@@ -2,8 +2,8 @@ plugin:
     name: 'sewa.mediafile::lang.plugin.name'
     description: 'sewa.mediafile::lang.plugin.description'
     author: Sewa
-    icon: oc-icon-adn
-    homepage: ''
+    icon: oc-icon-youtube-play
+    homepage: 'https://github.com/sewagolubkow/oc-mediafile-plugin'
 navigation:
     #mediafile:
         #label: 'sewa.mediafile::lang.plugin.name'
