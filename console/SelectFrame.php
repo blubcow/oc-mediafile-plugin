@@ -4,9 +4,6 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-use Config;
-use File;
-use Sewa\Mediafile\Models\Process;
 use Sewa\Mediafile\Classes\ProcessHelper;
 use Sewa\Mediafile\Classes\MediaFileManager;
 

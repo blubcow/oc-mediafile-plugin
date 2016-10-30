@@ -14,10 +14,7 @@ use Symfony\Component\HttpFoundation\File\File as FileObj; //TODO: why do we nee
 use Sewa\Mediafile\Classes\MediaFileManager;
 
 /**
- * File attachment model
- *
- * @package october\system
- * @author Alexey Bobkov, Samuel Georges
+ * MediaFile attachment model
  */
 class MediaFile extends FileBase
 {
