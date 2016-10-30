@@ -4,15 +4,44 @@
 - [Additional Setup Steps](#additional-setup-steps)
 
 ## Content
-This package contains two backend lists to replace the default ones.  
-This plugin is based on the backend `List` widget `Backend\Widgets\Lists`  
-and the backend `ListController` behaviour `Backend\Behaviors\ListController`.
+This package contains a replacement class for the file attachments.  
+Also, a backend form widget is included, as are some console commands.  
+For some functions to work you must have ffmpeg installed and the path added to our config file.
 
 ## Setup
 
 #### Add ffmpeg config value
 - Either override `ffmpegPath` in the plugin config file in `config/sewa/mediafile/config.php`
 - Or call `MediaFileManager::instance()->setFfmpegPath( 'C:\\ffmpeg.exe' )`
+
+#### Add Attachments to your Model
+```
+public $attachOne = [
+    'audio_file' => ['Sewa\Mediafile\Models\MediaFile']
+];
+public $attachMany = [
+    'video_files' => ['Sewa\Mediafile\Models\MediaFile']
+];
+```
+
+#### Add Form Widget to your Backend Form
+```
+fields:
+    video_files:
+        label: Video
+        type: mediafileupload
+        mode: video-multi
+        conversionTypes: ['mp4','webm','ogg']
+        imageWidth: 200
+        imageHeight: 200
+    audio_file:
+        label: Audio
+        type: mediafileupload
+        mode: audio-single
+        conversionTypes: ['mp3']
+        imageWidth: 200
+        imageHeight: 200
+```
 
 ## Additional Setup Steps
 
