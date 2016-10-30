@@ -1,0 +1,4 @@
+columns:
+    command:
+        label: Funktion
+        type: text

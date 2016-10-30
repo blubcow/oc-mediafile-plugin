@@ -1,0 +1,10 @@
+title: Process
+modelClass: Sewa\Mediafile\Models\Process
+list: $/sewa/mediafile/controllers/process/list_fields.yaml
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'

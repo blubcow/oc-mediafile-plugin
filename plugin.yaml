@@ -1,0 +1,20 @@
+plugin:
+    name: 'sewa.mediafile::lang.plugin.name'
+    description: 'sewa.mediafile::lang.plugin.description'
+    author: Sewa
+    icon: oc-icon-adn
+    homepage: ''
+navigation:
+    #mediafile:
+        #label: 'sewa.mediafile::lang.plugin.name'
+        #url: sewa/mediafile/process
+        #icon: icon-adn
+        #sideMenu:
+            #process:
+                #label: Processes
+                #url: sewa/mediafile/process
+                #icon: icon-sitemap
+            #test:
+                #label: 'Test'
+                #url: sewa/mediafile/test
+                #icon: icon-sitemap

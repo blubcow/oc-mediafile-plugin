@@ -1,0 +1,61 @@
+<div class="mediafileupload-select-frame">
+    <?= Form::open() ?>
+        <input type="hidden" name="file_id" value="<?= $file->id ?>" />
+        <input type="hidden" name="manage_id" value="<?= $relationManageId ?>" />
+        <input type="hidden" name="_relation_field" value="<?= $relationField ?>" />
+
+        <?php if (starts_with($displayMode, 'video')): ?>
+            <div class="file-upload-modal-image-header">
+                <!--<button type="button" class="close" data-dismiss="popup">&times;</button>-->
+                
+                <video width="" height="" controls="controls" preload="auto"
+                    data-plugin-path="<?= URL::to('plugins/sewa/mediafile/assets/mediaelement-js') ?>/">
+                    <?php if($file->getExtensionPath('mp4')): ?>
+                        <source type="video/mp4" src="<?= $file->getExtensionPath('mp4') ?>" />
+                    <?php elseif($file->getPath()): ?>
+                        <source type="<?= $file->getContentType() ?>" src="<?= $file->getPath() ?>" />
+                    <?php endif ?>
+                    <object width="" height="" type="application/x-shockwave-flash" data="<?= URL::to('plugins/sewa/mediafile/assets/mediaelement-js/flashmediaelement.swf') ?>">  
+                        <param name="movie" value="<?= URL::to('plugins/sewa/mediafile/assets/mediaelement-js/flashmediaelement.swf') ?>" />
+                        <?php if($file->getExtensionPath('mp4')): ?>
+                            <param name="flashvars" value="controls=true&file=<?= $file->getExtensionPath('mp4') ?>" />
+                        <?php elseif($file->getPath()): ?>
+                            <param name="flashvars" value="controls=true&file=<?= $file->getPath() ?>" />
+                        <?php endif ?>
+                    </object>
+                </video>
+            </div>
+        <?php endif ?>
+        
+        <div class="modal-body">
+            <p>Choose a video frame by timecode. It will be convertet to an image.</p>
+            
+            <div class="form-group">
+                <input
+                    type="text"
+                    name="timecode"
+                    class="form-control timecode"
+                    value="00:00:00.000"
+                    placeholder="Timecode for our preview image"
+                    style="text-align: center;"
+                    />
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <button
+                type="submit"
+                class="btn btn-primary"
+                data-request="<?= $this->getEventHandler('onSaveSelectFrame') ?>"
+                data-popup-load-indicator>
+                <?= e(trans('backend::lang.form.save')) ?>
+            </button>
+            <button
+                type="button"
+                class="btn btn-default"
+                data-dismiss="popup">
+                <?= e(trans('backend::lang.form.cancel')) ?>
+            </button>
+        </div>
+    <?= Form::close() ?>
+</div>

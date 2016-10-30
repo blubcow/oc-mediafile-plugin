@@ -1,0 +1,109 @@
+<div
+    id="<?= $this->getId() ?>"
+    class="field-mediafileupload style-item-single <?= $singleFile ? 'is-populated' : '' ?> <?= $this->previewMode ? 'is-preview' : '' ?>"
+    data-control="mediafileupload"
+    data-template="#<?= $this->getId('template') ?>"
+    data-error-template="#<?= $this->getId('errorTemplate') ?>"
+    data-unique-id="<?= $this->getId() ?>"
+    data-thumbnail-width="<?= $imageWidth ?: '100' ?>"
+    data-thumbnail-height="<?= $imageHeight ?: '100' ?>"
+    <?php if ($useCaption): ?>data-config-handler="<?= $this->getEventHandler('onLoadAttachmentConfig') ?>"<?php endif ?>
+    <?php if ($acceptedFileTypes): ?>data-file-types="<?= $acceptedFileTypes ?>"<?php endif ?>
+>
+    
+    <!-- Add New Video -->
+    <a
+        href="javascript:;"
+        style="<?= $cssBlockDimensions ?>"
+        class="upload-button">
+        <span class="upload-button-icon oc-<?= $emptyIcon ?> <?= $imageWidth > 100 ? 'large-icon' : '' ?>"></span>
+    </a>
+    
+    <!-- Existing file -->
+    <div class="upload-files-container">
+        <?php if ($singleFile): ?>
+           <div class="upload-object is-success" data-id="<?= $singleFile->id ?>" data-path="<?= $singleFile->pathUrl ?>" style="min-width: <?= e($imageWidth+300) ?>px">
+                <div class="icon-container item">
+                    <img src="<?= $singleFile->thumbUrl ?><?php if ($previewUpdate){ echo '?update-time='.time(); } ?>" alt="" />
+                </div>
+                
+                <div class="icon-overlay" style="<?= $cssBlockDimensions ?>">
+                    <a href="javascript:;" class="btn btn-default btn-sm"
+                        data-control="upload-preview"
+                        data-url="<?= Request::url() ?>"
+                        data-handler="<?= $this->getEventHandler('onPreviewUpload') ?>">
+                        <i class="oc-icon-upload"></i> Cover Upload
+                    </a>
+                    
+                    <?php if($mode == 'video'): ?>
+                    <a href="javascript:;" class="btn btn-default btn-sm"
+                        data-control="selectframe"
+                        data-handler="<?= $this->getEventHandler('onLoadSelectFrame') ?>">
+                        <i class="oc-icon-youtube-play"></i> Select Frame</a>
+                    <?php endif ?>
+                </div>
+                
+                <div class="info" style="margin-left: <?= e($imageWidth+15) ?>px">
+                    <h4 class="filename">
+                        <span data-dz-name><?= e($singleFile->title ?: $singleFile->file_name) ?></span>
+                        <a
+                            href="javascript:;"
+                            class="upload-remove-button"
+                            data-request="<?= $this->getEventHandler('onRemoveAttachment') ?>"
+                            data-request-confirm="<?= e(trans('backend::lang.fileupload.remove_confirm')) ?>"
+                            data-request-data="file_id: <?= $singleFile->id ?>"
+                            ><i class="icon-times"></i></a>
+                    </h4>
+                    <p class="size"><?= e($singleFile->sizeToString()) ?></p>
+                    
+                    <!-- Converted Files -->
+                    <table class="table table-condensed table-hover">
+                    <?php foreach($conversionTypes as $type){ ?>
+                        
+                        <tr>
+                            <td>
+                                <span class="type">
+                                    <?php if($singleFile->hasConvertedFile($type)){ ?>
+                                        <a href="<?= e($singleFile->getConvertedPath($type)) ?>" target="_blank"><?= $type ?> <!--<?= e($singleFile->getConvertedFileName($type)) ?>--></a>
+                                    <?php }else{ ?>
+                                        <?= $type ?>
+                                    <?php } ?>
+                                </span>
+                            </td>
+                            <td>
+                                
+                            <!-- If conversion is already in queue -->
+                            <?php if($singleFile->hasConversionInQueue($type)){ ?>
+                                <div class="btn-group pull-right">
+                                    <a href="javascript:;" class="btn btn-success btn-sm disabled">Converting...</a>
+                                    <a href="javascript:;" class="btn btn-success btn-sm">See Queue</a>
+                                </div>
+                            <?php }else{ ?>
+                                
+                                <!-- If converted file exists -->
+                                <?php if($singleFile->hasConvertedFile($type)){ ?>
+                                    <a href="javascript:;"
+                                        data-control="convert"
+                                        data-request="<?= $this->getEventHandler('onConvertFile') ?>"
+                                        data-request-data="convert_id: <?= $singleFile->id ?>, type: '<?= $type?>'"
+                                        class="btn btn-secondary btn-block btn-sm"><i class="oc-icon-repeat"></i> Convert Again</a>
+                                <?php }else{ ?>
+                                    <a href="javascript:;"
+                                        data-control="convert"
+                                        data-request="<?= $this->getEventHandler('onConvertFile') ?>"
+                                        data-request-data="convert_id: <?= $singleFile->id ?>, type: '<?= $type ?>'"
+                                        class="btn btn-primary btn-block btn-sm"><i class="oc-icon-youtube-play"></i> Convert File</a>
+                                <?php } ?>
+                            <?php } ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </table>
+                    
+                </div>
+                <div class="meta"></div>
+            </div>
+        <?php endif ?>
+    </div>
+    
+</div>

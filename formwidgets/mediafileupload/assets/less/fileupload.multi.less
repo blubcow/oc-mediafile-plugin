@@ -1,0 +1,38 @@
+//
+// Multi item
+//
+
+.field-mediafileupload.style-item-multi {
+    .upload-button,
+    .upload-object {
+        margin: 0 10px 10px 0;
+    }
+
+    .upload-button {
+        .uploader-block-button();
+        float: left;
+        width: 76px;
+        height: 76px;
+    }
+}
+
+//
+// On Sidebar
+//
+
+.form-sidebar .field-mediafileupload.style-item-multi .upload-button {
+    width: 100%;
+}
+
+//
+// Media
+//
+
+@media (max-width: 1024px) {
+    .field-mediafileupload.style-item-multi {
+        .upload-button {
+            width: 100% !important;
+            height: 76px !important;
+        }
+    }
+}
