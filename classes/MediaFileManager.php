@@ -99,6 +99,11 @@ class MediafileManager
         return $this->ffmpegPath;
     }
     
+    public function setFfmpegPath($path)
+    {
+        return $this->ffmpegPath = $path;
+    }
+    
     /**
      * Return operating system
      * 'mac', 'win' or 'linux'

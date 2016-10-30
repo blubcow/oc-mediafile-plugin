@@ -7,6 +7,12 @@ This package contains two backend lists to replace the default ones.
 This plugin is based on the backend `List` widget `Backend\Widgets\Lists`  
 and the backend `ListController` behaviour `Backend\Behaviors\ListController`.
 
+## Setup
+
+#### Add ffmpeg config value
+- Either override `ffmpegPath` in our plugin config file
+- Or call `MediaFileManager::instance()->setFfmpegPath( 'C:\\ffmpeg.exe' )`
+
 ## Additional Setup Steps
 
 ##### Add recognised types to `.htaccess` - `Line 1`
@@ -16,7 +22,7 @@ AddType video/mp4 .mp4
 AddType video/webm .webm
 ```
 
-##### add to `.htaccess` whitelist - `Line 65`
+##### Add extensions to `.htaccess` whitelist - `Line 65`
 ```
 RewriteCond %{REQUEST_URI} !\.xap
 RewriteCond %{REQUEST_URI} !\.ogv
