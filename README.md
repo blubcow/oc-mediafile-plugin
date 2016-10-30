@@ -1,5 +1,6 @@
 # Media Files for OctoberCMS
 - [Content](#content)
+- [Setup](#setup)
 - [Additional Setup Steps](#additional-setup-steps)
 
 ## Content
@@ -10,7 +11,7 @@ and the backend `ListController` behaviour `Backend\Behaviors\ListController`.
 ## Setup
 
 #### Add ffmpeg config value
-- Either override `ffmpegPath` in our plugin config file
+- Either override `ffmpegPath` in the plugin config file in `config/sewa/mediafile/config.php`
 - Or call `MediaFileManager::instance()->setFfmpegPath( 'C:\\ffmpeg.exe' )`
 
 ## Additional Setup Steps
