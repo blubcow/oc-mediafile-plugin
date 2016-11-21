@@ -166,9 +166,12 @@ class MediaFile extends FileBase
         $files = array_filter($files, function($file)use($ext){
             return $file->getExtension() == $ext;
         });
+        $files = array_values($files);
         
         // return path
         if(count($files)>0){
+            //print_r($files);
+            //exit();
             return $this->makePath( $files[0]->getFileName() );
         }
         return false;
